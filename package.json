@@ -1,0 +1,53 @@
+{
+  "name": "@allratestoday/central-bank-mcp",
+  "version": "0.1.0",
+  "mcpName": "io.github.cahthuranag/central-bank-mcp",
+  "description": "MCP server for official central-bank and tax-authority exchange rates — let AI tools (Claude Code, Cursor, Claude Desktop) fetch published rates from 60+ institutions (ECB, Fed, HMRC, BOJ, ...) via the AllRatesToday API.",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "claude",
+    "cursor",
+    "central-bank",
+    "official-rates",
+    "exchange-rate",
+    "ecb",
+    "tax",
+    "allratestoday"
+  ],
+  "license": "MIT",
+  "homepage": "https://allratestoday.com/central-bank-rates-api/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AllRates-Today/central-bank-mcp.git"
+  },
+  "bugs": "https://github.com/AllRates-Today/central-bank-mcp/issues",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "central-bank-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test test/*.test.mjs",
+    "prepublishOnly": "npm run build",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "typescript": "^7.0.2"
+  }
+}
