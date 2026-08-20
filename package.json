@@ -1,7 +1,7 @@
 {
   "name": "@allratestoday/central-bank-mcp",
-  "version": "0.1.0",
-  "mcpName": "io.github.cahthuranag/central-bank-mcp",
+  "version": "0.1.1",
+  "mcpName": "com.allratestoday/central-bank-mcp",
   "description": "MCP server for official central-bank and tax-authority exchange rates — let AI tools (Claude Code, Cursor, Claude Desktop) fetch published rates from 60+ institutions (ECB, Fed, HMRC, BOJ, ...) via the AllRatesToday API.",
   "keywords": [
     "mcp",

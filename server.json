@@ -1,0 +1,33 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.allratestoday/central-bank-mcp",
+  "title": "Central Bank Rates (AllRatesToday)",
+  "description": "Official central-bank & tax-authority exchange rates from 60+ institutions (ECB, Fed, BOJ, HMRC).",
+  "repository": {
+    "url": "https://github.com/AllRates-Today/central-bank-mcp",
+    "source": "github"
+  },
+  "websiteUrl": "https://allratestoday.com/central-bank-rates-api/",
+  "version": "0.1.1",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@allratestoday/central-bank-mcp",
+      "version": "0.1.1",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        {
+          "name": "ALLRATES_API_KEY",
+          "description": "Your AllRatesToday API key (art_live_xxxxx). Required for all tools. Sign up free at https://allratestoday.com/register.",
+          "isRequired": true,
+          "isSecret": true
+        },
+        {
+          "name": "ALLRATES_BASE_URL",
+          "description": "Override API base URL (default: https://allratestoday.com/api).",
+          "isRequired": false
+        }
+      ]
+    }
+  ]
+}
