@@ -90,14 +90,43 @@ test('429 maps to quota message', async () => {
   );
 });
 
-test('missing key throws before any request', async () => {
+test('keyless listBanks answers from the bundled catalogue, without calling out', async () => {
+  const client = new CentralBankClient({
+    fetchImpl: () => {
+      throw new Error('should not be called');
+    },
+  });
+  assert.equal(client.keyless, true);
+  const res = await client.listBanks();
+  assert.equal(res.catalog, 'bundled');
+  assert.ok(res.banks.length > 50);
+  assert.ok(res.banks.some((b) => b.code === 'ecb'));
+});
+
+test('keyless getRates reads the open endpoint, unauthenticated', async () => {
+  const capture = {};
+  const client = new CentralBankClient({
+    fetchImpl: stubFetch(200, { bank: 'ecb', rate_date: '2026-08-28', rate: 0.86 }, capture),
+  });
+  const res = await client.getRates('ecb', { source: 'USD', target: 'EUR' });
+  assert.match(capture.url, /\/open\/central-bank\/ecb\?source=USD&target=EUR$/);
+  assert.equal(capture.init.headers.Authorization, undefined);
+  assert.match(capture.init.headers['User-Agent'], /keyless/);
+  assert.equal(res.rate, 0.86);
+});
+
+test('keyless metered lookups explain how to get a free key', async () => {
   const client = new CentralBankClient({
     fetchImpl: () => {
       throw new Error('should not be called');
     },
   });
   await assert.rejects(
-    () => client.listBanks(),
-    (err) => err instanceof CentralBankApiError && /API key is required/.test(err.message),
+    () => client.getRates('ecb', { date: '2026-01-05' }),
+    (err) => err instanceof CentralBankApiError && /needs an AllRatesToday API key/.test(err.message),
+  );
+  await assert.rejects(
+    () => client.getHistory('ecb', { symbol: 'USD' }),
+    (err) => err instanceof CentralBankApiError && /register/.test(err.message),
   );
 });

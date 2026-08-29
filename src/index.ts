@@ -44,25 +44,29 @@ function fail(err: unknown) {
 
 async function main() {
   const apiKey = process.env.ALLRATES_API_KEY;
+
+  // No key is NOT a fatal error. The latest published table of every source is
+  // served by the open, edge-cached /api/open/central-bank/* endpoints, so the
+  // server starts and answers the most common question out of the box; tools
+  // that need the metered endpoints say so, with the sign-up link, when called.
+  // Exiting here instead would break the whole MCP config in the host client.
   if (!apiKey) {
     console.error(
       [
         '',
-        '  AllRatesToday central-bank MCP server requires an API key.',
+        '  AllRatesToday central-bank MCP — running in KEYLESS mode.',
         '',
-        '  1. Sign up free at https://allratestoday.com/register (free tier — no card required)',
-        '  2. Copy your API key from the dashboard',
-        '  3. Set ALLRATES_API_KEY in your MCP client config:',
+        '  Available now, no key needed:',
+        '    • list_central_banks       — every covered source',
+        '    • get_official_rates       — the latest published table (any source)',
         '',
-        '     "central-bank-rates": {',
-        '       "command": "npx",',
-        '       "args": ["-y", "@allratestoday/central-bank-mcp"],',
-        '       "env": { "ALLRATES_API_KEY": "art_live_..." }',
-        '     }',
+        '  Needs a free API key (historical dates, time series, cross-bank compare,',
+        '  publication calendars):',
+        '    1. https://allratestoday.com/register — free tier, no card, under a minute',
+        '    2. Add to this server\'s MCP config:  "env": { "ALLRATES_API_KEY": "art_live_..." }',
         '',
       ].join('\n'),
     );
-    process.exit(1);
   }
 
   const client = new CentralBankClient({
