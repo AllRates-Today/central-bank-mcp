@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.allratestoday/central-bank-mcp",
   "title": "Central Bank Rates (AllRatesToday)",
-  "description": "Official central-bank & tax-authority exchange rates from 100+ institutions (ECB, Fed, BOJ, HMRC). Works with no API key.",
+  "description": "Official central-bank & tax-authority rates from 100+ sources. No API key needed to start.",
   "repository": {
     "url": "https://github.com/AllRates-Today/central-bank-mcp",
     "source": "github"
