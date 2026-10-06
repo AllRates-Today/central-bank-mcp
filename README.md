@@ -21,7 +21,7 @@ Everything this server returns is an **official published rate**: fixed once the
 
 ## 🚀 Why this server?
 
-- 🏛️ **100+ official sources** — central banks (ECB, Fed, BOJ, SNB, RBI, …) plus tax authorities (HMRC, US Treasury, …), each served from its own published tables
+- 🏛️ **121 central banks + 3 tax authorities** — central banks (ECB, Fed, BOJ, SNB, RBI, …) plus tax authorities (HMRC, US Treasury, …), each served from its own published tables
 - 📅 **Point-in-time correctness** — ask for any date; weekends and holidays roll back to the rate legally in force, and the response tells you which publication date applied
 - 📊 **Cross-bank comparison** — one call returns every institution's rate for a pair, with min/max/median and spread stats
 - 🧮 **Honest derivations** — pairs a bank doesn't publish directly are cross-computed only within that bank's own table and flagged `derived`; banks are never mixed
