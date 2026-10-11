@@ -73,13 +73,13 @@ test('starts in keyless mode when ALLRATES_API_KEY is missing', async () => {
   assert.match(stderr, /allratestoday\.com\/register/);
 });
 
-test('every tool is read-only and carries a usable description', async () => {
+test('every tool is annotated and carries a usable description', async () => {
   const session = rpcSession({ ALLRATES_API_KEY: 'art_test_dummy' });
   try {
     for (const tool of await listTools(session)) {
       assert.ok(tool.inputSchema, `${tool.name} missing inputSchema`);
       assert.ok(tool.description.length > 50, `${tool.name} missing description`);
-      assert.equal(tool.annotations?.readOnlyHint, true, `${tool.name} not marked read-only`);
+      assert.equal(tool.annotations?.readOnlyHint, tool.name !== 'request_trial_key', `${tool.name} readOnlyHint`);
     }
   } finally {
     session.kill();

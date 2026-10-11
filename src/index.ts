@@ -59,6 +59,7 @@ async function main() {
         '  Available now, no key needed:',
         '    • list_central_banks       — every covered source',
         '    • get_official_rates       — the latest published table (any source)',
+        '    • request_trial_key        — self-issue a 100-call, 7-day key without an account',
         '',
         '  Needs a free API key (historical dates, time series, cross-bank compare,',
         '  publication calendars):',
@@ -207,6 +208,34 @@ async function main() {
     async ({ bank: bankCode, year, from, to }) => {
       try {
         return ok(await client.getAvailability(bankCode.toLowerCase(), { year, from, to }));
+      } catch (err) {
+        return fail(err);
+      }
+    },
+  );
+
+  server.registerTool(
+    'request_trial_key',
+    {
+      title: 'Request a trial API key',
+      description:
+        'Self-issue an AllRatesToday API key with 100 lifetime calls, valid 7 days, with no account and no email. Use it when another tool answered "needs an API key" and the user wants a dated central-bank table, a history series, a cross-bank comparison or a publication calendar right now. The key is adopted by this server for the rest of the session and returned once — tell the user to put it in the MCP config as ALLRATES_API_KEY to keep it. Capped at 3 keys per IP per day. For a lasting key, register at https://allratestoday.com/register (free, 300 calls) or see https://allratestoday.com/pricing.',
+      inputSchema: {
+        agent: z.string().max(80).optional().describe('Optional: the agent or product requesting the key.'),
+        purpose: z.string().max(200).optional().describe('Optional: one line on what the rates are for.'),
+      },
+      outputSchema: {
+        key: z.string().optional(),
+        calls: z.number().optional(),
+        expires_at: z.string().optional(),
+        adopted: z.boolean().describe('True when this server switched to the new key'),
+        note: z.string(),
+      },
+      annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: false, openWorldHint: true },
+    },
+    async ({ agent, purpose }) => {
+      try {
+        return ok(await client.requestTrialKey({ agent, purpose }));
       } catch (err) {
         return fail(err);
       }

@@ -130,3 +130,17 @@ test('keyless metered lookups explain how to get a free key', async () => {
     (err) => err instanceof CentralBankApiError && /register/.test(err.message),
   );
 });
+
+test('requestTrialKey POSTs JSON and adopts the key', async () => {
+  const capture = {};
+  const client = new CentralBankClient({
+    fetchImpl: stubFetch(201, { key: 'art_live_trial', calls: 100 }, capture),
+  });
+  assert.equal(client.keyless, true);
+  const res = await client.requestTrialKey({ purpose: 'test' });
+  assert.match(capture.url, /\/api\/agent\/keys$/);
+  assert.equal(capture.init.method, 'POST');
+  assert.equal(capture.init.headers['Content-Type'], 'application/json');
+  assert.equal(res.adopted, true);
+  assert.equal(client.keyless, false);
+});

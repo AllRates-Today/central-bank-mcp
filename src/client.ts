@@ -64,7 +64,7 @@ export interface CbRate {
 }
 
 export class CentralBankClient {
-  private readonly apiKey?: string;
+  private apiKey?: string;
   private readonly baseUrl: string;
   private readonly fetchImpl: typeof fetch;
 
@@ -77,6 +77,49 @@ export class CentralBankClient {
   /** True when no API key is configured: only the open endpoints are reachable. */
   get keyless(): boolean {
     return !this.apiKey;
+  }
+
+  /** Adopt a key at runtime (used after request_trial_key) so the rest of the session is keyed. */
+  setApiKey(key: string | undefined): void {
+    this.apiKey = key || undefined;
+  }
+
+  /**
+   * Self-issue a trial key (100 calls, 7 days, no account) and adopt it for the
+   * rest of this process. POST with a JSON body: the site rejects bodiless
+   * POSTs as cross-site form submissions.
+   */
+  async requestTrialKey(params: { agent?: string; purpose?: string } = {}) {
+    const res = await this.fetchImpl(`${this.baseUrl}/agent/keys`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'User-Agent': `central-bank-mcp/${VERSION}`,
+      },
+      body: JSON.stringify({ agent: params.agent, purpose: params.purpose }),
+    });
+    const text = await res.text();
+    let body: any;
+    try {
+      body = text ? JSON.parse(text) : null;
+    } catch {
+      body = text;
+    }
+    if (!res.ok) {
+      const upstream = body && typeof body === 'object' && typeof body.error === 'string' ? body.error : undefined;
+      throw new CentralBankApiError(upstream ?? `HTTP ${res.status}`, res.status, body);
+    }
+    const key = body && typeof body === 'object' && typeof body.key === 'string' ? body.key : undefined;
+    if (key) this.setApiKey(key);
+    return {
+      ...(body ?? {}),
+      adopted: Boolean(key),
+      note:
+        'This server now uses the trial key for the rest of this session. To keep it after a restart, ' +
+        'put it in the MCP config: "env": { "ALLRATES_API_KEY": "<key>" }. For a lasting key register free ' +
+        'at https://allratestoday.com/register (300 calls) or see https://allratestoday.com/pricing.',
+    };
   }
 
   private async request<T>(

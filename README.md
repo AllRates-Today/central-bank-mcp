@@ -43,6 +43,7 @@ Install it with no configuration at all and it starts, connects, and answers:
 | `get_official_rate_history` | 🔑 | Same. |
 | `compare_official_rates` | 🔑 | Same. |
 | `get_publication_calendar` | 🔑 | Same. |
+| `request_trial_key` | ✅ | Self-issues a 100-call, 7-day key with no account and adopts it for the session. |
 
 The keyless path reads the open, edge-cached `/api/open/central-bank/{bank}`
 endpoint — free to use with a visible attribution link back to allratestoday.com
@@ -148,6 +149,7 @@ Edit `claude_desktop_config.json` (Settings → Developer → Edit Config) and a
 | `get_official_rate_history` | Date-by-date official series for one pair | Paid, billed ~1 call per month covered |
 | `compare_official_rates` | One pair across every bank, with spread stats | Free (key required) |
 | `get_publication_calendar` | Dates a bank actually published (no values) | Free (key required) |
+| `request_trial_key` | Self-issue a 100-call, 7-day trial key (no account) and use it for the rest of the session | Keyless, 3 per IP per day |
 
 ## 🔒 Privacy
 
