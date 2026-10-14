@@ -1,6 +1,6 @@
 {
   "name": "@allratestoday/central-bank-mcp",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "mcpName": "com.allratestoday/central-bank-mcp",
   "description": "MCP server for official central-bank and tax-authority exchange rates — let AI tools (Claude Code, Cursor, Claude Desktop) fetch published rates from 120+ institutions (ECB, Fed, HMRC, BOJ, ...) via the AllRatesToday API.",
   "keywords": [
@@ -15,7 +15,15 @@
     "tax",
     "allratestoday",
     "exchangerate",
-    "exchange rate"
+    "exchange rate",
+    "currency-api",
+    "currency-exchange-rates",
+    "forex-api",
+    "currency-conversion",
+    "currency-exchange",
+    "currency-rates",
+    "currency",
+    "forex"
   ],
   "license": "MIT",
   "homepage": "https://allratestoday.com/central-bank-rates-api/",
