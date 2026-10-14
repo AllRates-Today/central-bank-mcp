@@ -7,6 +7,7 @@ Website: https://allratestoday.com/central-bank-rates-api/ · Hosted endpoint (n
 [![license](https://img.shields.io/npm/l/@allratestoday/central-bank-mcp.svg)](./LICENSE)
 [![MCP](https://img.shields.io/badge/Model%20Context%20Protocol-1.x-blue.svg)](https://modelcontextprotocol.io)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6.svg)](https://www.typescriptlang.org/)
+[![Central Bank Mcp on AI Agents Listing](https://aiagentslisting.com/central-bank-mcp/badge.svg?claim=837813c0572a45328913a7361270b559)](https://aiagentslisting.com/mcp/central-bank-mcp)
 
 **Give your AI assistant the official exchange rates that compliance, tax, and accounting actually require. A Model Context Protocol server that lets Claude Code, Cursor, Claude Desktop, Windsurf, and any MCP-compatible client fetch published central-bank and tax-authority rates from 121 central banks and 3 tax authorities — ECB, Fed, Bank of Japan, HMRC, US Treasury, and more — via the [AllRatesToday API](https://allratestoday.com/central-bank-rates-api/).**
 
