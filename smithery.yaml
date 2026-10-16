@@ -2,18 +2,16 @@ startCommand:
   type: stdio
   configSchema:
     type: object
-    required:
-      - allratesApiKey
     properties:
       allratesApiKey:
         type: string
         title: AllRatesToday API key
-        description: Your AllRatesToday API key (format art_live_xxxxx). Get one free at https://allratestoday.com/register — no credit card required.
+        description: Optional. Without it the server runs keyless (latest published tables). A free key (format art_live_xxxxx) from https://allratestoday.com/register adds crosses, compare and calendars; dated tables need a paid plan.
   commandFunction: |-
     (config) => ({
       command: 'npx',
       args: ['-y', '@allratestoday/central-bank-mcp'],
-      env: { ALLRATES_API_KEY: config.allratesApiKey }
+      env: config.allratesApiKey ? { ALLRATES_API_KEY: config.allratesApiKey } : {}
     })
   exampleConfig:
     allratesApiKey: art_live_xxxxxxxxxxxxxxxxxxxxxxxx
