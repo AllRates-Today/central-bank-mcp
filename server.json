@@ -2,25 +2,25 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.allratestoday/central-bank-mcp",
   "title": "Central Bank Rates (AllRatesToday)",
-  "description": "Official central-bank & tax-authority rates from 100+ sources. No API key needed to start.",
+  "description": "Official exchange rates from 121 central banks + 3 tax authorities. No API key needed to start.",
   "repository": {
     "url": "https://github.com/AllRates-Today/central-bank-mcp",
     "source": "github"
   },
   "websiteUrl": "https://allratestoday.com/central-bank-rates-api/",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "@allratestoday/central-bank-mcp",
-      "version": "0.3.3",
+      "version": "0.3.4",
       "transport": {
         "type": "stdio"
       },
       "environmentVariables": [
         {
           "name": "ALLRATES_API_KEY",
-          "description": "Optional. Without it the server runs keyless: the latest published table of any source plus the source catalogue. A free key (https://allratestoday.com/register) unlocks historical dates, time series, cross-bank comparison and publication calendars.",
+          "description": "Optional. Without it the server runs keyless: the latest published table of any source plus the source catalogue. A free key (https://allratestoday.com/register, 300 lifetime calls) unlocks cross-bank comparison and publication calendars; dated tables and time series need a paid plan.",
           "isRequired": false,
           "isSecret": true
         },

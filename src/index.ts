@@ -61,10 +61,11 @@ async function main() {
         '    • get_official_rates       — the latest published table (any source)',
         '    • request_trial_key        — self-issue a 100-call, 7-day key without an account',
         '',
-        '  Needs a free API key (historical dates, time series, cross-bank compare,',
-        '  publication calendars):',
-        '    1. https://allratestoday.com/register — free tier, no card, under a minute',
+        '  Needs a free API key (cross-bank compare, publication calendars):',
+        '    1. https://allratestoday.com/register — free tier (300 lifetime calls), no card',
         '    2. Add to this server\'s MCP config:  "env": { "ALLRATES_API_KEY": "art_live_..." }',
+        '',
+        '  Needs a paid plan (dated tables, history series): https://allratestoday.com/pricing',
         '',
       ].join('\n'),
     );
@@ -82,7 +83,7 @@ async function main() {
     {
       title: 'List covered central banks & tax authorities',
       description:
-        "Call this FIRST when you need a bank code, or when the user asks 'which central banks do you cover?' or 'do you have rates from X?'. Returns { banks: [{ code, name, country, home_ccy, rate_types, latest date, ... }], disclaimer } for 60+ institutions — central banks (ECB, Fed, BOJ, ...) plus tax authorities (HMRC, US Treasury, ...). The `code` field is what every other tool takes as its `bank` parameter. Cheap to call.",
+        "Call this FIRST when you need a bank code, or when the user asks 'which central banks do you cover?' or 'do you have rates from X?'. Returns { banks: [{ code, name, country, home_ccy, rate_types, latest date, ... }], disclaimer } for 121 central banks + 3 tax authorities (plus a composite) — central banks (ECB, Fed, BOJ, ...) plus tax authorities (HMRC, US Treasury, ...). The `code` field is what every other tool takes as its `bank` parameter. Cheap to call.",
       inputSchema: {},
       annotations: READ_ONLY,
     },
@@ -100,7 +101,7 @@ async function main() {
     {
       title: "Get a bank's official published rates",
       description:
-        "Use this for OFFICIAL rates a specific institution published — 'what is the ECB rate for USD?', 'Bank of Japan official rate on 2026-03-14', 'HMRC rate for invoicing'. These are the fixed rates in force for compliance, tax, customs, and accounting — NOT live market rates. Omit `date` for the newest published table; give `date` (paid plans) for the table in force on that day (weekends/holidays roll back to the last published date — the response's rate_date says which). Omit source/target for the bank's full table { rates: [{ base, quote, type, value }] }; give both for one pair — cross-computed via the bank's own home currency when not directly published, flagged `derived`. For live mid-market rates use the @allratestoday/mcp-server package instead.",
+        "Use this for OFFICIAL rates a specific institution published — 'what is the ECB rate for USD?', 'Bank of Japan official rate on 2026-03-14', 'HMRC rate for invoicing'. These are the fixed rates in force for compliance, tax, customs, and accounting — NOT live market rates. Omit `date` for the newest published table; give `date` (paid plans) for the table in force on that day (weekends/holidays roll back to the last published date — the response's rate_date says which). Omit source/target for the bank's full table { rates: [{ base, quote, type, value }] }; give both for one pair — with an API key, pairs not directly published are cross-computed via the bank's own home currency and flagged `derived`; keyless serves only published pairs and their inverses. For live mid-market rates use the @allratestoday/mcp-server package instead.",
       inputSchema: {
         bank,
         date: isoDate

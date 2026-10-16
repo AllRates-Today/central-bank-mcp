@@ -99,7 +99,9 @@ test('keyless listBanks answers from the bundled catalogue, without calling out'
   assert.equal(client.keyless, true);
   const res = await client.listBanks();
   assert.equal(res.catalog, 'bundled');
-  assert.ok(res.banks.length > 50);
+  assert.ok(res.banks.length >= 125);
+  assert.ok(res.banks.filter((b) => b.kind === 'central_bank').length >= 121);
+  assert.ok(res.banks.filter((b) => b.kind === 'tax').length >= 3);
   assert.ok(res.banks.some((b) => b.code === 'ecb'));
 });
 
@@ -115,7 +117,7 @@ test('keyless getRates reads the open endpoint, unauthenticated', async () => {
   assert.equal(res.rate, 0.86);
 });
 
-test('keyless metered lookups explain how to get a free key', async () => {
+test('keyless metered lookups explain which key or plan they need', async () => {
   const client = new CentralBankClient({
     fetchImpl: () => {
       throw new Error('should not be called');
@@ -123,11 +125,19 @@ test('keyless metered lookups explain how to get a free key', async () => {
   });
   await assert.rejects(
     () => client.getRates('ecb', { date: '2026-01-05' }),
-    (err) => err instanceof CentralBankApiError && /needs an AllRatesToday API key/.test(err.message),
+    (err) =>
+      err instanceof CentralBankApiError &&
+      /needs an AllRatesToday API key/.test(err.message) &&
+      /PAID plan/.test(err.message) &&
+      !/free tier covers/.test(err.message),
   );
   await assert.rejects(
     () => client.getHistory('ecb', { symbol: 'USD' }),
-    (err) => err instanceof CentralBankApiError && /register/.test(err.message),
+    (err) => err instanceof CentralBankApiError && /PAID plan/.test(err.message) && /pricing/.test(err.message),
+  );
+  await assert.rejects(
+    () => client.compareBanks('USD', 'EUR'),
+    (err) => err instanceof CentralBankApiError && /free tier covers/.test(err.message) && /register/.test(err.message),
   );
 });
 

@@ -27,9 +27,9 @@ Everything this server returns is an **official published rate**: fixed once the
 - 🏛️ **121 central banks + 3 tax authorities** — central banks (ECB, Fed, BOJ, SNB, RBI, …) plus tax authorities (HMRC, US Treasury, …), each served from its own published tables
 - 📅 **Point-in-time correctness** — ask for any date; weekends and holidays roll back to the rate legally in force, and the response tells you which publication date applied
 - 📊 **Cross-bank comparison** — one call returns every institution's rate for a pair, with min/max/median and spread stats
-- 🧮 **Honest derivations** — pairs a bank doesn't publish directly are cross-computed only within that bank's own table and flagged `derived`; banks are never mixed
+- 🧮 **Honest derivations** — with an API key, pairs a bank doesn't publish directly are cross-computed only within that bank's own table and flagged `derived`; banks are never mixed. Keyless serves only published pairs and their inverses
 - 🔓 **Works with no API key** — installs and answers out of the box; the latest published table of every source is open
-- 🧰 **Five focused tools** — small surface, easy for the model to use correctly
+- 🧰 **Six focused tools** — small surface, easy for the model to use correctly
 - 🔌 **Works everywhere MCP does** — stdio transport, MCP 1.x; Claude Code, Cursor, Claude Desktop, Windsurf, or any generic host
 
 ## 🔓 Keyless mode — what works with no setup
@@ -38,11 +38,11 @@ Install it with no configuration at all and it starts, connects, and answers:
 
 | Tool | Keyless | What you get |
 |---|---|---|
-| `list_central_banks` | ✅ | Every covered institution, from a catalogue bundled with the package (no coverage dates). |
-| `get_official_rates` | ✅ | The **latest published table** of any source, or one pair from it, with the publisher's own `rate_date`. |
-| `get_official_rates` with a `date` | 🔑 | One sentence explaining how to get a key. |
-| `get_official_rate_history` | 🔑 | Same. |
-| `compare_official_rates` | 🔑 | Same. |
+| `list_central_banks` | ✅ | Every covered institution (121 central banks, 3 tax authorities and the composite), from a catalogue bundled with the package (no coverage dates). |
+| `get_official_rates` | ✅ | The **latest published table** of any source, or one published pair (or its inverse) from it, with the publisher's own `rate_date`. Cross pairs need a key. |
+| `get_official_rates` with a `date` | 🔑 | One sentence explaining that dated tables need a paid plan. |
+| `get_official_rate_history` | 🔑 | Same (paid plan). |
+| `compare_official_rates` | 🔑 | One sentence explaining how to get a free key. |
 | `get_publication_calendar` | 🔑 | Same. |
 | `request_trial_key` | ✅ | Self-issues a 100-call, 7-day key with no account and adopts it for the session. |
 
@@ -52,9 +52,9 @@ endpoint — free to use with a visible attribution link back to allratestoday.c
 
 ## 🔑 Get your API key (free)
 
-A key adds historical dates, time series, cross-bank comparison and publication
-calendars. The free tier covers the latest published tables and light historical
-use — **no credit card required**. Deep history and dated tables need a paid plan.
+A free key adds cross-bank comparison, cross-computed pairs and publication
+calendars — 300 lifetime calls, **no credit card required**. Dated (historical)
+tables and time series need a paid plan: free and trial keys get a 403 for them.
 
 1. Register at [allratestoday.com/register](https://allratestoday.com/register) — 30 seconds
 2. Verify your email
@@ -81,7 +81,7 @@ Everything below still applies for other MCP clients.
 
 ## ☁️ Hosted endpoint — nothing to install
 
-The same tools also run as a hosted **Streamable HTTP** MCP server (together with the tools of the sibling AllRatesToday server, nine in total). Paste the URL into any client that supports remote MCP — Claude.ai and Claude Desktop connectors, ChatGPT, Cursor, VS Code, Codex, Gemini CLI:
+The same six tools also run as a hosted **Streamable HTTP** MCP server, together with the five tools of the sibling AllRatesToday server — eleven in total on the hosted endpoint (this npm package itself exposes six). Paste the URL into any client that supports remote MCP — Claude.ai and Claude Desktop connectors, ChatGPT, Cursor, VS Code, Codex, Gemini CLI:
 
 ```
 https://allratestoday.com/api/mcp

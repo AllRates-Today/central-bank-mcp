@@ -26,10 +26,14 @@ export class CentralBankApiError extends Error {
  * instead of a bare 401.
  */
 export class NeedsKeyError extends CentralBankApiError {
-  constructor(what: string) {
+  constructor(what: string, paid = false) {
     super(
-      `This lookup (${what}) needs an AllRatesToday API key. The free tier covers it — ` +
-        'sign up at https://allratestoday.com/register (no card, under a minute), then set ' +
+      `This lookup (${what}) needs an AllRatesToday API key. ` +
+        (paid
+          ? 'Dated tables and history series need a PAID plan (free and trial keys get a 403) — ' +
+            'see https://allratestoday.com/pricing, then set '
+          : 'The free tier covers it (300 lifetime calls) — sign up at ' +
+            'https://allratestoday.com/register (no card, under a minute), then set ') +
         'ALLRATES_API_KEY in the MCP server config and restart. Without a key this server can ' +
         'still return the latest published table for any source (get_official_rates) and the ' +
         'source catalogue (list_central_banks).',
@@ -131,7 +135,7 @@ export class CentralBankClient {
       if (value !== undefined && value !== '') url.searchParams.set(key, value);
     }
 
-    if (!this.apiKey) throw new NeedsKeyError(path);
+    if (!this.apiKey) throw new NeedsKeyError(path, /\/history$|\/\d{4}-\d{2}-\d{2}$/.test(path));
 
     const headers: Record<string, string> = {
       'Accept': 'application/json',
@@ -221,7 +225,7 @@ export class CentralBankClient {
     // Keyless: the latest published table is open (edge-cached, no upstream
     // cost). A past date is not — that is the metered part.
     if (this.keyless) {
-      if (opts.date) return Promise.reject(new NeedsKeyError(`${bank} table for ${opts.date}`));
+      if (opts.date) return Promise.reject(new NeedsKeyError(`${bank} table for ${opts.date}`, true));
       return this.openRequest<Record<string, unknown>>(
         `/open/central-bank/${encodeURIComponent(bank)}`,
         { source: opts.source, target: opts.target },
