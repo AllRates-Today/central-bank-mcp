@@ -32,6 +32,21 @@ Everything this server returns is an **official published rate**: fixed once the
 - 🧰 **Six focused tools** — small surface, easy for the model to use correctly
 - 🔌 **Works everywhere MCP does** — stdio transport, MCP 1.x; Claude Code, Cursor, Claude Desktop, Windsurf, or any generic host
 
+## 🔑 Get your API key (free)
+
+A free key adds cross-bank comparison, cross-computed pairs and publication
+calendars — 300 lifetime calls, **no credit card required**. Dated (historical)
+tables and time series need a paid plan: free and trial keys get a 403 for them.
+
+1. Register at [allratestoday.com/register](https://allratestoday.com/register) — 30 seconds
+2. Verify your email
+3. Copy your key from the dashboard (format: `art_live_xxxxx`)
+4. Use it as `ALLRATES_API_KEY` in the configs below
+
+Without one the server prints a short summary of keyless mode (below) on stderr and
+keeps running — it never exits, because an MCP server that exits breaks the
+host client's whole configuration.
+
 ## 🔓 Keyless mode — what works with no setup
 
 Install it with no configuration at all and it starts, connects, and answers:
@@ -49,21 +64,6 @@ Install it with no configuration at all and it starts, connects, and answers:
 The keyless path reads the open, edge-cached `/api/open/central-bank/{bank}`
 endpoint — free to use with a visible attribution link back to allratestoday.com
 (the exact wording ships in each response's `attribution` field).
-
-## 🔑 Get your API key (free)
-
-A free key adds cross-bank comparison, cross-computed pairs and publication
-calendars — 300 lifetime calls, **no credit card required**. Dated (historical)
-tables and time series need a paid plan: free and trial keys get a 403 for them.
-
-1. Register at [allratestoday.com/register](https://allratestoday.com/register) — 30 seconds
-2. Verify your email
-3. Copy your key from the dashboard (format: `art_live_xxxxx`)
-4. Use it as `ALLRATES_API_KEY` in the configs below
-
-Without one the server prints a short summary of keyless mode on stderr and
-keeps running — it never exits, because an MCP server that exits breaks the
-host client's whole configuration.
 
 ## 🧩 Easiest install: the Claude Code plugin
 
