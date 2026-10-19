@@ -162,6 +162,14 @@ Only the request parameters and your API key ever reach allratestoday.com — ne
 - [Per-bank npm SDKs](https://github.com/AllRates-Today)
 - [`@allratestoday/mcp-server`](https://www.npmjs.com/package/@allratestoday/mcp-server) — live mid-market rates MCP server
 
+## 🔗 Links
+
+- [API Documentation](https://allratestoday.com/developers)
+- [Register (Free)](https://allratestoday.com/register)
+- [Dashboard](https://allratestoday.com/profile)
+- [Status](https://allratestoday.com/status)
+- [GitHub](https://github.com/AllRates-Today/central-bank-mcp)
+
 ## License
 
 MIT © AllRatesToday
