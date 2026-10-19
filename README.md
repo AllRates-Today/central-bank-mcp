@@ -161,6 +161,7 @@ Only the request parameters and your API key ever reach allratestoday.com — ne
 - [Central bank REST API docs](https://allratestoday.com/central-bank-rates-api/)
 - [Per-bank npm SDKs](https://github.com/AllRates-Today)
 - [`@allratestoday/mcp-server`](https://www.npmjs.com/package/@allratestoday/mcp-server) — live mid-market rates MCP server
+- Open data archive — the same published tables mirrored daily: [Hugging Face](https://huggingface.co/datasets/AllRatesToday/central-bank-exchange-rates) · [Kaggle](https://www.kaggle.com/datasets/allratestoday/central-bank-exchange-rates) (CC BY-NC 4.0)
 
 ## 🔗 Links
 
