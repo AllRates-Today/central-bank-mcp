@@ -62,8 +62,15 @@ Install it with no configuration at all and it starts, connects, and answers:
 | `request_trial_key` | ✅ | Self-issues a 100-call, 7-day key with no account and adopts it for the session. |
 
 The keyless path reads the open, edge-cached `/api/open/central-bank/{bank}`
-endpoint — free to use with a visible attribution link back to allratestoday.com
-(the exact wording ships in each response's `attribution` field).
+endpoint (the exact attribution wording also ships in each response's `attribution` field).
+
+**Attribution.** Keyless use requires a visible, followable link to AllRatesToday wherever the rates are shown (a footer, an about page, a README). With an API key it is appreciated but not required.
+
+```html
+<a href="https://allratestoday.com">Exchange rates by AllRatesToday</a>
+```
+
+Markdown: `Exchange rates by [AllRatesToday](https://allratestoday.com)`. Full wording: <https://allratestoday.com/terms/#attribution>.
 
 ## 🧩 Easiest install: the Claude Code plugin
 
