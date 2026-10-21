@@ -9,7 +9,7 @@ Website: https://allratestoday.com/central-bank-rates-api/ · Hosted endpoint (n
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6.svg)](https://www.typescriptlang.org/)
 [![Central Bank Mcp on AI Agents Listing](https://aiagentslisting.com/central-bank-mcp/badge.svg?claim=837813c0572a45328913a7361270b559)](https://aiagentslisting.com/mcp/central-bank-mcp)
 
-**Give your AI assistant the official exchange rates that compliance, tax, and accounting actually require. A Model Context Protocol server that lets Claude Code, Cursor, Claude Desktop, Windsurf, and any MCP-compatible client fetch published central-bank and tax-authority rates from 121 central banks and 3 tax authorities — ECB, Fed, Bank of Japan, HMRC, US Treasury, and more — via the [AllRatesToday API](https://allratestoday.com/central-bank-rates-api/).**
+**Give your AI assistant the official exchange rates that compliance, tax, and accounting actually require. A Model Context Protocol server that lets Claude Code, Cursor, Claude Desktop, Windsurf, and any MCP-compatible client fetch published central-bank and tax-authority rates from [122 central banks and 4 tax authorities](https://allratestoday.com/central-bank-rates-api/institutions/) — ECB, Fed, Bank of Japan, HMRC, US Treasury, and more — via the [AllRatesToday API](https://allratestoday.com/central-bank-rates-api/).**
 
 After installation, your assistant can answer questions like:
 
@@ -24,7 +24,7 @@ Everything this server returns is an **official published rate**: fixed once the
 
 ## 🚀 Why this server?
 
-- 🏛️ **121 central banks + 3 tax authorities** — central banks (ECB, Fed, BOJ, SNB, RBI, …) plus tax authorities (HMRC, US Treasury, …), each served from its own published tables
+- 🏛️ **[122 central banks and 4 tax authorities](https://allratestoday.com/central-bank-rates-api/institutions/)** — central banks (ECB, Fed, BOJ, SNB, RBI, …) plus tax authorities (HMRC, US Treasury, …), each served from its own published tables
 - 📅 **Point-in-time correctness** — ask for any date; weekends and holidays roll back to the rate legally in force, and the response tells you which publication date applied
 - 📊 **Cross-bank comparison** — one call returns every institution's rate for a pair, with min/max/median and spread stats
 - 🧮 **Honest derivations** — with an API key, pairs a bank doesn't publish directly are cross-computed only within that bank's own table and flagged `derived`; banks are never mixed. Keyless serves only published pairs and their inverses
@@ -53,7 +53,7 @@ Install it with no configuration at all and it starts, connects, and answers:
 
 | Tool | Keyless | What you get |
 |---|---|---|
-| `list_central_banks` | ✅ | Every covered institution (121 central banks, 3 tax authorities and the composite), from a catalogue bundled with the package (no coverage dates). |
+| `list_central_banks` | ✅ | Every covered institution ([122 central banks, 4 tax authorities](https://allratestoday.com/central-bank-rates-api/institutions/) and the composite), from a catalogue bundled with the package (no coverage dates). |
 | `get_official_rates` | ✅ | The **latest published table** of any source, or one published pair (or its inverse) from it, with the publisher's own `rate_date`. Cross pairs need a key. |
 | `get_official_rates` with a `date` | 🔑 | One sentence explaining that dated tables need a paid plan. |
 | `get_official_rate_history` | 🔑 | Same (paid plan). |
