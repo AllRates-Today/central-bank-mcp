@@ -62,7 +62,7 @@ async function main() {
         '    • request_trial_key        — self-issue a 100-call, 7-day key without an account',
         '',
         '  Needs a free API key (cross-bank compare, publication calendars):',
-        '    1. https://allratestoday.com/register — free tier (300 lifetime calls), no card',
+        '    1. https://allratestoday.com/register — free tier, no card',
         '    2. Add to this server\'s MCP config:  "env": { "ALLRATES_API_KEY": "art_live_..." }',
         '',
         '  Needs a paid plan (dated tables, history series): https://allratestoday.com/pricing',

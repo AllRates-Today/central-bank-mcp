@@ -35,7 +35,7 @@ Everything this server returns is an **official published rate**: fixed once the
 ## 🔑 Get your API key (free)
 
 A free key adds cross-bank comparison, cross-computed pairs and publication
-calendars — 300 lifetime calls, **no credit card required**. Dated (historical)
+calendars — free, **no credit card required**. Dated (historical)
 tables and time series need a paid plan: free and trial keys get a 403 for them.
 
 1. Register at [allratestoday.com/register](https://allratestoday.com/register) — 30 seconds

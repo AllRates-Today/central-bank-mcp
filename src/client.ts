@@ -32,7 +32,7 @@ export class NeedsKeyError extends CentralBankApiError {
         (paid
           ? 'Dated tables and history series need a PAID plan (free and trial keys get a 403) — ' +
             'see https://allratestoday.com/pricing, then set '
-          : 'The free tier covers it (300 lifetime calls) — sign up at ' +
+          : 'The free tier covers it — sign up at ' +
             'https://allratestoday.com/register (no card, under a minute), then set ') +
         'ALLRATES_API_KEY in the MCP server config and restart. Without a key this server can ' +
         'still return the latest published table for any source (get_official_rates) and the ' +
@@ -122,7 +122,7 @@ export class CentralBankClient {
       note:
         'This server now uses the trial key for the rest of this session. To keep it after a restart, ' +
         'put it in the MCP config: "env": { "ALLRATES_API_KEY": "<key>" }. For a lasting key register free ' +
-        'at https://allratestoday.com/register (300 calls) or see https://allratestoday.com/pricing.',
+        'at https://allratestoday.com/register (free) or see https://allratestoday.com/pricing.',
     };
   }
 
