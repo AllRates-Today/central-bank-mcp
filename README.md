@@ -173,6 +173,7 @@ Only the request parameters and your API key ever reach allratestoday.com — ne
 ## 🔗 Links
 
 - [API Documentation](https://allratestoday.com/developers)
+- [Download central bank rates](https://allratestoday.com/download-central-bank-rates/) — every bank's tables as Excel, CSV or JSON
 - [Register (Free)](https://allratestoday.com/register)
 - [Dashboard](https://allratestoday.com/profile)
 - [Status](https://allratestoday.com/status)
