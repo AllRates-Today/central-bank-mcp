@@ -120,8 +120,7 @@ Both commands launch the stdio MCP server and wait for a client to connect — y
 ### Claude Code
 
 ```bash
-claude mcp add central-bank-rates -- npx -y @allratestoday/central-bank-mcp
-claude mcp env central-bank-rates ALLRATES_API_KEY=art_live_xxxxx
+claude mcp add central-bank-rates -e ALLRATES_API_KEY=art_live_xxxxx -- npx -y @allratestoday/central-bank-mcp
 ```
 
 Restart Claude Code. Verify by asking: *"Which central banks can you fetch official rates from?"*
