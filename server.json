@@ -2,18 +2,18 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.allratestoday/central-bank-mcp",
   "title": "Central Bank Rates (AllRatesToday)",
-  "description": "Official exchange rates from 121 central banks + 3 tax authorities. No API key needed to start.",
+  "description": "Official exchange rates from 130+ central banks and tax authorities. No API key needed to start.",
   "repository": {
     "url": "https://github.com/AllRates-Today/central-bank-mcp",
     "source": "github"
   },
   "websiteUrl": "https://allratestoday.com/central-bank-rates-api/",
-  "version": "0.3.12",
+  "version": "0.3.15",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "@allratestoday/central-bank-mcp",
-      "version": "0.3.12",
+      "version": "0.3.15",
       "transport": {
         "type": "stdio"
       },

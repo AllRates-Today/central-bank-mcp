@@ -83,7 +83,7 @@ async function main() {
     {
       title: 'List covered central banks & tax authorities',
       description:
-        "Call this FIRST when you need a bank code, or when the user asks 'which central banks do you cover?' or 'do you have rates from X?'. Returns { banks: [{ code, name, country, home_ccy, rate_types, latest date, ... }], disclaimer } for 121 central banks + 3 tax authorities (plus a composite) — central banks (ECB, Fed, BOJ, ...) plus tax authorities (HMRC, US Treasury, ...). The `code` field is what every other tool takes as its `bank` parameter. Cheap to call.",
+        "Call this FIRST when you need a bank code, or when the user asks 'which central banks do you cover?' or 'do you have rates from X?'. Returns { banks: [{ code, name, country, home_ccy, rate_types, latest date, ... }], disclaimer } for 130+ central banks and tax authorities (plus a composite) — central banks (ECB, Fed, BOJ, ...) plus tax authorities (HMRC, US Treasury, ...). The `code` field is what every other tool takes as its `bank` parameter. Cheap to call.",
       inputSchema: {},
       annotations: READ_ONLY,
     },
