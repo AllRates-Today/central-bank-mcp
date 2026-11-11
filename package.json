@@ -4,6 +4,7 @@
   "mcpName": "com.allratestoday/central-bank-mcp",
   "description": "MCP server for official central-bank and tax-authority exchange rates — let AI tools (Claude Code, Cursor, Claude Desktop) fetch official rates from 130+ institutions (ECB, Fed, HMRC, BOJ, ...) via the AllRatesToday API.",
   "keywords": [
+    "exchange-rate-api",
     "mcp",
     "model-context-protocol",
     "claude",
