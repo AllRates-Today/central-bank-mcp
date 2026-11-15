@@ -154,3 +154,14 @@ test('requestTrialKey POSTs JSON and adopts the key', async () => {
   assert.equal(res.adopted, true);
   assert.equal(client.keyless, false);
 });
+
+test('requestTrialKey adopts api_key, the field the live endpoint returns', async () => {
+  const client = new CentralBankClient({
+    fetchImpl: stubFetch(200, { api_key: 'art_live_real', calls_included: 100, expires_at: '2026-11-22T00:00:00Z' }),
+  });
+  const res = await client.requestTrialKey({});
+  assert.equal(res.adopted, true);
+  assert.equal(res.key, 'art_live_real');
+  assert.equal(res.calls, 100);
+  assert.equal(client.keyless, false);
+});
