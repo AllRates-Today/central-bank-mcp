@@ -8,12 +8,12 @@
     "source": "github"
   },
   "websiteUrl": "https://allratestoday.com/central-bank-rates-api/",
-  "version": "0.3.17",
+  "version": "0.3.18",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "@allratestoday/central-bank-mcp",
-      "version": "0.3.17",
+      "version": "0.3.18",
       "transport": {
         "type": "stdio"
       },
